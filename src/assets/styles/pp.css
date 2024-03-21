@@ -1,0 +1,239 @@
+@media screen and (min-width: 481px) {
+.policy-container {
+    height: 600px !important;
+    overflow-y: scroll;
+    transform: translate(0%, -1rem);
+    height: 70%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 15px 55px;
+  }
+
+  .policy-container.settings {
+    transform: translate(0%, -10rem);
+  }
+
+  .about-us {
+    overflow-y: hidden;
+  }
+}
+
+.policy-container.sign {
+  position: relative;
+  height: 100%;
+  top: 0px;
+  left: 0;
+  padding: 15px 50px;
+  background-color: #fff;
+  overflow-y: auto;
+  z-index: 3;
+}
+
+/* 진희 작성 모달 수정 0525*/
+/* 진희 작성 모달 수정 0603 웹에서 화면이 위로 올라감 재수정*/
+@media screen and (min-width: 481px) {
+  .modal-wrap.agree.open {
+    /* transform: translateY(-30%); */
+    transform: translateY(-12.5%);
+  }
+
+  /*명삼 수정*/
+  .modal-wrap.agree.open .modal-close {
+    margin-top: 20px;
+    align-self: flex-start;
+    width: 32px;
+    height: 20px;
+  }
+}
+
+/* 전문보기 수정 진희 작성 0511 */
+
+@media screen and (max-width: 480px) {
+  .policy-container {
+    position: absolute;
+    height: 90%;
+    left: 0;
+    background-color: #fff;
+    overflow-y: scroll;
+
+    top: 50px;
+    padding: 15px 20px;
+    padding-bottom: 40px;
+  }
+
+  .policy-container button {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .serviceArgreeContainer.full-content {
+    height: 80vh;
+    max-height: 100vh;
+  }
+
+  /*웹 - 소셜로그인 회원가입 전문보기*/
+  .policy-container.sign.email-sign {
+    position: relative;
+    height: 87vh;
+    width: 100%;
+    overflow-y: scroll;
+    transform: translateY(0%);
+  }
+
+  .policy-container.sign.email-sign button {
+    display: block;
+  }
+
+  .policy-container.sign.email-sign .modal-close {
+    width: 100%;
+    /* background: url("../imgs/icons/exit.svg") no-repeat; */
+    background-position: right center;
+    background-size: 16px;
+    margin-top: 0;
+  }
+}
+
+.policy-container__textBox {
+  margin: 20px 0 40px;
+}
+
+.policy-container__textBox:last-child {
+  margin-bottom: 0;
+}
+
+.policy__main__title {
+  font-size: 20px;
+  margin-bottom: 40px;
+  font-weight: 1000;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-style: double;
+  text-underline-position: under;
+}
+
+@media screen and (max-width: 480px) {
+  .policy__main__title {
+    font-size: 18px;
+  }
+
+  .policy-container.sign {
+    padding: 15px 20px;
+  }
+
+  .policy__table h2,
+  .policy__table p {
+    font-size: 11px;
+    line-height: 12.5px;
+  }
+
+  .policy__table td:nth-child(1) {
+    width: 20%;
+  }
+
+  .policy__table td:nth-child(2) {
+    width: 45%;
+  }
+
+  .policy__table td:nth-child(3) {
+    width: 35%;
+  }
+}
+
+.policy__title {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.policy__desc {
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  word-break: keep-all;
+}
+
+.policy__desc.no {
+  margin-left: 25px;
+  text-indent: -1em;
+}
+
+.policy__desc__detail {
+  color: #666;
+  display: block;
+  margin: 5px 0 5px 20px;
+  line-height: 1.2rem;
+  font-size: 0.8rem;
+  text-indent: -1.3em;
+}
+
+.policy__desc__detail.hyphen {
+  text-indent: -0.7em;
+}
+
+.redColor {
+  color: #cb2027;
+}
+
+.policy-container .service-complete-btn {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: auto;
+  min-width: 178px;
+  height: 50px;
+  border-radius: 25px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 1rem;
+  background: var(--default-deepBlueColor);
+  color: #fff;
+  font-weight: normal;
+  transition: 0.15s;
+  margin-top: 50px;
+}
+
+.policy__table {
+  width: 100%;
+  margin: 30px 0;
+  word-break: keep-all;
+}
+
+.policy__table tr {
+  border-bottom: 1px solid #222;
+}
+
+.policy__table tr td {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 20px;
+}
+
+.table__thrRow td p {
+  /*padding: 20px 0;*/
+}
+
+.policy-check-div {
+  margin-top: 30px;
+  border-top: 1px solid;
+  padding-top: 10px;
+}
+
+/* 제보 찾을 수 없는 @멤버 디자인 */
+.wrongTag_contianer .text {
+  color: #666;
+  margin: 5px;
+  cursor: pointer;
+  color: var(--default-deepBlueColor);
+}
+
+.wrongTag_contianer .text:hover {
+  text-decoration: underline;
+}
+
+.mBott {
+  margin-bottom: 40px;
+}
