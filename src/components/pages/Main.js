@@ -7,7 +7,7 @@ import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
 import Stack from "@mui/joy/Stack";
 import { local } from "./local";
-import ToastMessage from "../ToastMessage";
+import ToastMessage from "./ToastMessage";
 
 // redux recoil 사용
 // 날씨 api는 react query
@@ -61,16 +61,7 @@ export default function Main() {
 
   const handleInputEnter = (e) => {
     if (e.key === "Enter") {
-      if (todoList.length <= 0) {
-        setTodoList(() => [
-          {
-            no: 1,
-            title: inputValue,
-            done: false,
-            important: false,
-          },
-        ]);
-      } else if (inputValue.trim("") !== "") {
+      if (inputValue.trim("") !== "") {
         let checkBoolList = todoList?.map((item) =>
           item.title === inputValue ? true : false
         );
@@ -94,13 +85,15 @@ export default function Main() {
     }
   };
 
-  const handleImportant = (idx) => {
+  const handleImportant = (selectedItem) => {
     setTodoList((prev) => [
-      ...prev.map((item) =>
-        item.no === idx.no
+      ...prev.map((item, index) => {
+        console.log("item", index, item);
+        console.log("selectedItem", selectedItem);
+        return item.no === selectedItem.no
           ? { ...item, important: !item.important }
-          : { ...item }
-      ),
+          : { ...item };
+      }),
     ]);
     local.setLocal(todoList);
   };
