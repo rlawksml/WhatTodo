@@ -8,6 +8,17 @@ import Input from "@mui/joy/Input";
 import Stack from "@mui/joy/Stack";
 import { local } from "./local";
 import ToastMessage from "./ToastMessage";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import axios from "axios";
+import Test from "./Test";
 
 // redux recoil 사용
 // 날씨 api는 react query
@@ -23,6 +34,8 @@ export default function Main() {
   const [doneNum, setDoneNum] = useState(0);
   const [ingNum, setIngNum] = useState(0);
   const [congrateState, setCongrateState] = useState(false);
+  const dispatch = useDispatch();
+
 
   const handleDoneItem = (idx) => {
     setTodoList((prev) => [
@@ -32,6 +45,8 @@ export default function Main() {
           : { ...item }
       ),
     ]);
+
+    dispatch({type : "done", todo : idx.title})
     local.setLocal(todoList);
   };
 
@@ -52,6 +67,7 @@ export default function Main() {
           important: false,
         },
       ]);
+      dispatch({type : "add", no:todoList?.length, todo:inputValue, done:false, important:false})
       local.setLocal(todoList);
     } else {
       console.log("이미 들어가 잇음");
@@ -76,7 +92,9 @@ export default function Main() {
               important: false,
             },
           ]);
+          dispatch({type : "add", no:todoList?.length, todo:inputValue, done:false, important:false})
           local.setLocal(todoList);
+
         } else {
           console.log("이미 들어가 잇음");
         }
@@ -159,6 +177,7 @@ export default function Main() {
       >
         TodaY
       </Typography>
+      <Test/>
       <InputStack className="" spacing={1}>
         <Input
           className="inputTag"
