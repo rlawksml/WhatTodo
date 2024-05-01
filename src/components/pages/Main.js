@@ -163,10 +163,18 @@ export default function Main() {
     });
   }, [todoList]);
 
+  const [today, setToday] = useState(null);
+
   useEffect(() => {
+    setToday(new Date()); 
+    
     let initData = local.getLocal();
     initData === null ? setTodoList([]) : setTodoList(local.getLocal());
   }, []);
+
+  let day = today?.getDate()
+  let month = today?.getMonth()+1
+  let year = today?.getFullYear()
 
   return (
     <Container maxWidth="sm">
@@ -175,7 +183,7 @@ export default function Main() {
         color="ActiveBorder"
         variant="h4"
       >
-        TodaY
+        TodaY {today && year + "/" + month + "/" + day}
       </Typography>
       <Test/>
       <InputStack className="" spacing={1}>
