@@ -3,8 +3,15 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-export default function ToastMessage({ congrateState, setCongrateState }) {
-  const handleClose = (event, reason) => {
+interface ToastMEssageProps {
+  congrateState : boolean,
+  setCongrateState: (state : boolean) => void,
+  message ? : string,
+}
+
+const ToastMessage : React.FC<ToastMEssageProps> = ({ congrateState, setCongrateState, message = "모든 일을 완료했어요!!" }) => {
+  
+  const handleClose = (event: React.SyntheticEvent<any, Event> | Event, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }
@@ -24,9 +31,12 @@ export default function ToastMessage({ congrateState, setCongrateState }) {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          모든 일을 완료했어요!!
+         {message}
         </Alert>
       </Snackbar>
     </div>
   );
 }
+
+
+export default ToastMessage;

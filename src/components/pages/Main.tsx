@@ -6,8 +6,6 @@ import Checkbox from "@mui/joy/Checkbox";
 import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
 import Stack from "@mui/joy/Stack";
-import { local } from "./local";
-import ToastMessage from "./ToastMessage";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -18,7 +16,9 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import axios from "axios";
-import Test from "./Test";
+import ToastMessage from "./ToastMessage";
+import { local } from "./local";
+import { Test } from "./Test";
 
 // redux recoil 사용
 // 날씨 api는 react query
@@ -27,18 +27,30 @@ import Test from "./Test";
 // 다음 프로젝트 들어가기 3월 19일부터 //
 // 4월전까지 끝내고 4월에는 선거 프로젝트 만들어보기
 
+
+interface TodoList {
+  id ? : number,
+  no? : number,
+  title : string,
+  done : boolean,
+  important : boolean,
+}
+
 export default function Main() {
-  const [todoList, setTodoList] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [importantNum, setImportantNum] = useState(0);
-  const [doneNum, setDoneNum] = useState(0);
-  const [ingNum, setIngNum] = useState(0);
-  const [congrateState, setCongrateState] = useState(false);
+  const [todoList, setTodoList] = useState<TodoList[]>([]);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [importantNum, setImportantNum] = useState<number>(0);
+  const [doneNum, setDoneNum] = useState<number>(0);
+  const [ingNum, setIngNum] = useState<number>(0);
+  const [congrateState, setCongrateState] = useState<boolean>(false);
   const dispatch = useDispatch();
 
 
-  const handleDoneItem = (idx) => {
-    setTodoList((prev) => [
+  const handleDoneItem = (idx : {
+    no ?: number,
+    title ?: string,
+  }) => {
+    setTodoList( (prev) => [
       ...prev.map((item) =>
         item.no === idx.no
           ? { ...item, done: !item.done, important: false }
@@ -50,14 +62,14 @@ export default function Main() {
     local.setLocal(todoList);
   };
 
-  const handleAddList = (e) => {
+  const handleAddList = (e : React.SyntheticEvent<any, Event > | Event) => {
     e.preventDefault();
 
     let checkBoolList = todoList?.map((item) =>
       item.title === inputValue ? true : false
     );
 
-    if (!checkBoolList.includes(true) && inputValue.trim("") !== "") {
+    if (!checkBoolList.includes(true) && inputValue.trim() !== "") {
       setTodoList((prev) => [
         ...prev,
         {
@@ -75,9 +87,9 @@ export default function Main() {
     setInputValue("");
   };
 
-  const handleInputEnter = (e) => {
-    if (e.key === "Enter") {
-      if (inputValue.trim("") !== "") {
+  const handleInputEnter = (e : React.SyntheticEvent<any, Event> | Event | any) => {
+    if (e.key  === "Enter") {
+      if (inputValue.trim() !== "") {
         let checkBoolList = todoList?.map((item) =>
           item.title === inputValue ? true : false
         );
@@ -103,12 +115,12 @@ export default function Main() {
     }
   };
 
-  const handleImportant = (selectedItem) => {
+  const handleImportant = (selectedItem: TodoList | null) => {
     setTodoList((prev) => [
       ...prev.map((item, index) => {
         console.log("item", index, item);
         console.log("selectedItem", selectedItem);
-        return item.no === selectedItem.no
+        return item.no === selectedItem?.no
           ? { ...item, important: !item.important }
           : { ...item };
       }),
@@ -116,7 +128,7 @@ export default function Main() {
     local.setLocal(todoList);
   };
 
-  const handleDelete = (idx) => {
+  const handleDelete = (idx : TodoList) => {
     setTodoList((prev) => [...prev.filter((item) => item.no !== idx.no)]);
     local.setLocal(todoList);
   };
@@ -163,13 +175,13 @@ export default function Main() {
     });
   }, [todoList]);
 
-  const [today, setToday] = useState(null);
+  const [today, setToday] = useState<Date>(new Date());
 
   useEffect(() => {
     setToday(new Date()); 
     
     let initData = local.getLocal();
-    initData === null ? setTodoList([]) : setTodoList(local.getLocal());
+    setTodoList(initData === null ? [] : initData)
   }, []);
 
   let day = today?.getDate()
@@ -203,7 +215,7 @@ export default function Main() {
           }
         />
       </InputStack>
-      <MyContainer $maxWidth="lg">
+      <MyContainer >
         <div className="todoCt yet">
           {todoList.length <= 0 ? (
             <Typography
@@ -277,7 +289,7 @@ export default function Main() {
                     color="primary"
                     variant="soft"
                     onClick={() => {
-                      handleImportant();
+                      handleImportant(null);
                     }}
                     disabled
                   >
