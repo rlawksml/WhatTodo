@@ -1,27 +1,13 @@
 import { createStore } from "redux";
+import { TodoList } from "../types";
 
-
-interface TodoList {
-    id : number;
-    title : string;
-    done : boolean;
-    important : boolean;
-}
-
-interface Actions {
-    type? : string;
-    id? :number;
-    no? : number;
-    title? : string;
-    done? : boolean;
-    important? : boolean;
-    todo? : string
+interface Actions extends TodoList {
+    type? : string,
 }
 
 const todoList :TodoList[] = []
 
-
-const todoReducser = (state : TodoList[] = todoList, action:Actions) : any =>{
+const todoReducser = (state : TodoList[] = todoList, action:Actions) : TodoList[] =>{
     switch(action.type){
         case "add":
             return [{no: action.no, todo: action.todo, done: action.done, important: action.important},...state]

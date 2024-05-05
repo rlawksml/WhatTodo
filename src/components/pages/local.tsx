@@ -1,13 +1,5 @@
 import { json } from "react-router";
-
-interface TodoList {
-  id ? : number,
-  no? : number,
-  title : string,
-  done : boolean,
-  important : boolean,
-}
-
+import { TodoList } from "../../types";
 
 export const local = {
   getLocal: () : TodoList[] | null => {

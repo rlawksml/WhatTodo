@@ -19,6 +19,7 @@ import axios from "axios";
 import ToastMessage from "./ToastMessage";
 import { local } from "./local";
 import { Test } from "./Test";
+import { TodoList } from "../../types";
 
 // redux recoil 사용
 // 날씨 api는 react query
@@ -26,15 +27,6 @@ import { Test } from "./Test";
 
 // 다음 프로젝트 들어가기 3월 19일부터 //
 // 4월전까지 끝내고 4월에는 선거 프로젝트 만들어보기
-
-
-interface TodoList {
-  id ? : number,
-  no? : number,
-  title : string,
-  done : boolean,
-  important : boolean,
-}
 
 export default function Main() {
   const [todoList, setTodoList] = useState<TodoList[]>([]);
